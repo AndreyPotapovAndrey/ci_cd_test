@@ -49,7 +49,7 @@ jobs: # - большие блоки дей-й, кот-е будут происх
       - name: Проверка наличия изменений в репозитории
       - uses: actions/checkout@v3 # Или выполнение действия (run) или запуск какого-то скрипта,
       # который уже кто-то написал (uses)
-      - name: Установка PYthon и доп библиотеки
+      - name: Установка Python и доп библиотек
         uses: actions/setup-python@v4 # У GitHub Actions есть свой магазин (GitHub Marketplace). Тип Actions.
         with:
           python-version: '3.11'
@@ -58,7 +58,7 @@ jobs: # - большие блоки дей-й, кот-е будут происх
         run: pip install -r requirements.txt
 
       - name: Линтинг (PEP8)
-        run: flake8 logistic --exclude logistic/migrations
+        run: flake8 logistic --exclude logistic/migrations/
 
       - name: Тестирование
         run: python manage.py test
