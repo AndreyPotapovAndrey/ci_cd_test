@@ -1,0 +1,10 @@
+from unittest import TestCase
+from rest_framework.test import APIClient
+
+
+class TestSmth(TestCase):
+    def tests_sample_view_ok(self):
+        client = APIClient()
+        url = '/api/v1/test/'
+        response = client.get(url)
+        self.assertEquals(response.status_code, second=200)
