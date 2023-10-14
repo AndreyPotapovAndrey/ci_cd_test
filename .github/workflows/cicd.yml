@@ -1,68 +1,68 @@
-name: Testing and deployment of a Django Project
+  name: Testing and deployment of a Django Project
 
-on:
-  push: # - процесс будет запускаться, когда будет "git push"
-    branches: #- какие ветки будут использованы. Если будет другая, дей-я будут игнор-ся
-      - ci
-      - master  # - список (можно [ci, master])
-jobs: # - большие блоки дей-й, кот-е будут происходить. Далее будет подразделяться.
-  testing: # - имя
-    runs-on: ubuntu-22.04 # - выбираем операц. систему (OS),
-    #                                   на которой будут запускаться тесты.
-    #                                   Задаём вариант выбора. Для того, чтобы
-    #                                   была похожая среда с той,
-    #                                   которая у нас на сервере,
-    #                                   выбираем ту же самую ОС.
-    env: # название переменных мы можем задавать какой угодно, но значение должно быть таким, какое мы указали на GitHub
-      KEY_SECRET: ${{ secrets.DJANGO_SECRET }}
-      IS_DEBUG: ${{ secrets.DJANGO_DEBUG }}
-      AVAILABLE_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-      ENGINE: ${{ secrets.DATABASE_ENGINE }}
-      USER: ${{ secrets.DATABASE_USER }}
-      PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      HOST: ${{ secrets.DATABASE_HOST }}
-      NAME: ${{ secrets.DATABASE_NAME }}
-      PORT: ${{ secrets.DATABASE_PORT }}
-    services: # postgres подключается как отдельный сервис
-      postgresql_services: # можно любое название
-        image: postgres:12 # Нужно указать какой образ postgresql нужно взять из Docker-а
-        env: # У этого сервиса будут свои переменные окружения.
-          # Применяем считанные уже с GitHub переменные.
-          # Но они уже будут в строго определённом формате. По другому эти переменные назвать нельзя.
-          # По-другому работать не будет!
-          POSTGRES_DB: ${{ env.NAME }}
-          POSTGRES_USER: ${{ env.USERNAME }}
-          POSTGRES_PASSWORD: ${{ env.PASSWORD }}
-        ports:
-          - 5432:5432 # По умолчанию используется порт 5432. В контейнере тоже.
-        options: # Нужно сделать так, чтобы postgres успел подгрузиться. При тестах
-          # бывает такой момент, что он не успевает подгрузиться. Проверка падает. И оно
-          # помечается, как невыполненное. Нужно сделать так, чтобы он с определённой
-          # периодичностью несколько раз проверил, что БД у нас подгрузилась и только
-          # после этого запускал тест. Чтобы не было такого, что тест запустился, а БД - нет.
-          --health-cmd pg_isready # Мы говорим, что вот здесь проверь жизнеспособность системы, убедись,
-          # что postgres готов для работы. 
-          --health-interval 5s # Задаём интервал в 5 секунд.
-          --health-timeout 5s # Таймаут тоже  5 секунд.
-          --health-retries 5 # Каждые 5 раз будет проверять, что postgres прогрузился.
-    steps: # Описываем шаги для проверок.
-      - name: Проверка наличия изменений в репозитории
-      - uses: actions/checkout@v3 # Или выполнение действия (run) или запуск какого-то скрипта,
-      # который уже кто-то написал (uses)
-      - name: Установка Python и доп библиотек
-        uses: actions/setup-python@v4 # У GitHub Actions есть свой магазин (GitHub Marketplace). Тип Actions.
-        with:
-          python-version: '3.11'
+  on:
+    push: # - процесс будет запускаться, когда будет "git push"
+      branches: #- какие ветки будут использованы. Если будет другая, дей-я будут игнор-ся
+        - ci
+        - master  # - список (можно [ci, master])
+  jobs: # - большие блоки дей-й, кот-е будут происходить. Далее будет подразделяться.
+    testing: # - имя
+      runs-on: ubuntu-22.04 # - выбираем операц. систему (OS),
+      #                                   на которой будут запускаться тесты.
+      #                                   Задаём вариант выбора. Для того, чтобы
+      #                                   была похожая среда с той,
+      #                                   которая у нас на сервере,
+      #                                   выбираем ту же самую ОС.
+      env: # название переменных мы можем задавать какой угодно, но значение должно быть таким, какое мы указали на GitHub
+        KEY_SECRET: ${{ secrets.DJANGO_SECRET }}
+        IS_DEBUG: ${{ secrets.DJANGO_DEBUG }}
+        AVAILABLE_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+        ENGINE: ${{ secrets.DATABASE_ENGINE }}
+        USER: ${{ secrets.DATABASE_USER }}
+        PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        HOST: ${{ secrets.DATABASE_HOST }}
+        NAME: ${{ secrets.DATABASE_NAME }}
+        PORT: ${{ secrets.DATABASE_PORT }}
+      services: # postgres подключается как отдельный сервис
+        postgresql_services: # можно любое название
+          image: postgres:12 # Нужно указать какой образ postgresql нужно взять из Docker-а
+          env: # У этого сервиса будут свои переменные окружения.
+            # Применяем считанные уже с GitHub переменные.
+            # Но они уже будут в строго определённом формате. По другому эти переменные назвать нельзя.
+            # По-другому работать не будет!
+            POSTGRES_DB: ${{ env.NAME }}
+            POSTGRES_USER: ${{ env.USERNAME }}
+            POSTGRES_PASSWORD: ${{ env.PASSWORD }}
+          ports:
+            - 5432:5432 # По умолчанию используется порт 5432. В контейнере тоже.
+          options: # Нужно сделать так, чтобы postgres успел подгрузиться. При тестах
+            # бывает такой момент, что он не успевает подгрузиться. Проверка падает. И оно
+            # помечается, как невыполненное. Нужно сделать так, чтобы он с определённой
+            # периодичностью несколько раз проверил, что БД у нас подгрузилась и только
+            # после этого запускал тест. Чтобы не было такого, что тест запустился, а БД - нет.
+            --health-cmd pg_isready # Мы говорим, что вот здесь проверь жизнеспособность системы, убедись,
+            # что postgres готов для работы. 
+            --health-interval 5s # Задаём интервал в 5 секунд.
+            --health-timeout 5s # Таймаут тоже  5 секунд.
+            --health-retries 5 # Каждые 5 раз будет проверять, что postgres прогрузился.
+      steps: # Описываем шаги для проверок.
+        - name: Проверка наличия изменений в репозитории
+        - uses: actions/checkout@v3 # Или выполнение действия (run) или запуск какого-то скрипта,
+        # который уже кто-то написал (uses)
+        - name: Установка Python и доп библиотек
+          uses: actions/setup-python@v4 # У GitHub Actions есть свой магазин (GitHub Marketplace). Тип Actions.
+          with:
+            python-version: '3.11'
 
-      - name: Установка зависимостей проекта
-        run: pip install -r requirements.txt
+        - name: Установка зависимостей проекта
+          run: pip install -r requirements.txt
 
-      - name: Линтинг (PEP8)
-        run: flake8 logistic --exclude logistic/migrations/
+        - name: Линтинг (PEP8)
+          run: flake8 logistic --exclude logistic/migrations/
 
-      - name: Тестирование
-        run: python manage.py test
-#       run: pytest
+        - name: Тестирование
+          run: python manage.py test
+  #       run: pytest
 
-#      - name: Деплой
+  #      - name: Деплой
 
