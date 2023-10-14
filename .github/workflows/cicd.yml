@@ -24,7 +24,7 @@ jobs: # - большие блоки дей-й, кот-е будут происх
       NAME: ${{ secrets.DATABASE_NAME }}
       PORT: ${{ secrets.DATABASE_PORT }}
     services: # postgres подключается как отдельный сервис
-      portgresql_services: # можно любое название
+      postgresql_services: # можно любое название
         image: postgres:12 # Нужно указать какой образ postgresql нужно взять из Docker-а
         env: # У этого сервиса будут свои переменные окружения.
           # Применяем считанные уже с GitHub переменные.
