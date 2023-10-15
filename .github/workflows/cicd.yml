@@ -19,7 +19,7 @@
         NAME: ${{ secrets.DATABASE_NAME }}
         PORT: ${{ secrets.DATABASE_PORT }}
       services:
-        postgresql_services:
+        main_postgres:
           image: postgres:12
           env:
             POSTGRES_DB: ${{ env.NAME }}
