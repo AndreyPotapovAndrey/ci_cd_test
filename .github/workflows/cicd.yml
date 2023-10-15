@@ -50,15 +50,15 @@
         - name: Тестирование
           run: python manage.py test
           env:
-            KEY_SECRET: ${{ env.KEY_SECRET }}
-            IS_DEBUG: ${{ env.IS_DEBUG }}
+            SECRET_KEY: ${{ env.KEY_SECRET }}
+            DEBUG: ${{ env.IS_DEBUG }}
             ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
-            ENGINE: ${{ env.ENGINE }}
-            USER: ${{ env.USER }}
-            PASSWORD: ${{ env.PASSWORD }}
-            HOST: ${{ env.HOST }}
-            NAME: ${{ env.NAME }}
-            PORT: ${{ env.PORT }}
+            DB_ENGINE: ${{ env.ENGINE }}
+            DB_USER: ${{ env.USER }}
+            DB_PASSWORD: ${{ env.PASSWORD }}
+            DB_HOST: ${{ env.HOST }}
+            DB_NAME: ${{ env.NAME }}
+            DB_PORT: ${{ env.PORT }}
   #       run: pytest
 
   #      - name: Деплой
