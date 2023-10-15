@@ -50,9 +50,6 @@
         - name: Тестирование
           run: python manage.py test
           env:
-            KEY_SECRET: ${{ secrets.DJANGO_SECRET }}
-            IS_DEBUG: ${{ secrets.DJANGO_DEBUG }}
-            ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
             ENGINE: ${{ secrets.DATABASE_ENGINE }}
             USER: ${{ secrets.DATABASE_USER }}
             PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
