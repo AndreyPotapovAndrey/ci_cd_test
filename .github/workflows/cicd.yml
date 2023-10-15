@@ -50,15 +50,15 @@
         - name: Тестирование
           run: python manage.py test
           env:
-            KEY_SECRET: ${{ env.DJANGO_SECRET }}
-            IS_DEBUG: ${{ env.DJANGO_DEBUG }}
+            KEY_SECRET: ${{ env.KEY_SECRET }}
+            IS_DEBUG: ${{ env.IS_DEBUG }}
             ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
-            ENGINE: ${{ env.DATABASE_ENGINE }}
-            USER: ${{ env.DATABASE_USER }}
-            PASSWORD: ${{ env.DATABASE_PASSWORD }}
-            HOST: ${{ env.DATABASE_HOST }}
-            NAME: ${{ env.DATABASE_NAME }}
-            PORT: ${{ env.DATABASE_PORT }}
+            ENGINE: ${{ env.ENGINE }}
+            USER: ${{ env.USER }}
+            PASSWORD: ${{ env.PASSWORD }}
+            HOST: ${{ env.HOST }}
+            NAME: ${{ env.NAME }}
+            PORT: ${{ env.PORT }}
   #       run: pytest
 
   #      - name: Деплой
