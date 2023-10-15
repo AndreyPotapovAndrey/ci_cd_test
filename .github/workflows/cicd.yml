@@ -34,7 +34,7 @@
             --health-retries 5
       steps:
         - name: Проверка наличия изменений в репозитории
-        - uses: actions/checkout@v3
+          uses: actions/checkout@v3
 
         - name: Установка Python и доп библиотек
           uses: actions/setup-python@v4
