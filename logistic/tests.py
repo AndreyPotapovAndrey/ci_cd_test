@@ -7,4 +7,4 @@ class TestSmth(TestCase):
         client = APIClient()
         url = '/api/v1/test/'
         response = client.get(url)
-        self.assertEquals(response.status_code, second=200)
+        self.assertEquals(response.status_code, 200)
