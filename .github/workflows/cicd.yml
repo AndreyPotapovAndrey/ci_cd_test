@@ -23,7 +23,7 @@
           image: postgres:12
           env:
             POSTGRES_DB: ${{ env.NAME }}
-            POSTGRES_USER: ${{ env.USERNAME }}
+            POSTGRES_USER: ${{ env.USER }}
             POSTGRES_PASSWORD: ${{ env.PASSWORD }}
           ports:
             - 5432:5432
