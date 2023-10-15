@@ -9,15 +9,15 @@
     testing:
       runs-on: ubuntu-22.04
       env:
-        KEY_SECRET: ${{ secrets.DJANGO_SECRET }}
-        IS_DEBUG: ${{ secrets.DJANGO_DEBUG }}
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET }}
+        DEBUG: ${{ secrets.DJANGO_DEBUG }}
         ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-        ENGINE: ${{ secrets.DATABASE_ENGINE }}
-        USER: ${{ secrets.DATABASE_USER }}
-        PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        HOST: ${{ secrets.DATABASE_HOST }}
-        NAME: ${{ secrets.DATABASE_NAME }}
-        PORT: ${{ secrets.DATABASE_PORT }}
+        DB_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+        DB_USER: ${{ secrets.DATABASE_USER }}
+        DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        DB_HOST: ${{ secrets.DATABASE_HOST }}
+        DB_NAME: ${{ secrets.DATABASE_NAME }}
+        DB_PORT: ${{ secrets.DATABASE_PORT }}
       services:
         postgres_main:
           image: postgres:12
@@ -50,15 +50,15 @@
         - name: Тестирование
           run: python manage.py test
           env:
-            KEY_SECRET: ${{ secrets.DJANGO_SECRET }}
-            IS_DEBUG: ${{ secrets.DJANGO_DEBUG }}
+            SECRET_KEY: ${{ secrets.DJANGO_SECRET }}
+            DEBUG: ${{ secrets.DJANGO_DEBUG }}
             ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-            ENGINE: ${{ secrets.DATABASE_ENGINE }}
-            USER: ${{ secrets.DATABASE_USER }}
-            PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-            HOST: ${{ secrets.DATABASE_HOST }}
-            NAME: ${{ secrets.DATABASE_NAME }}
-            PORT: ${{ secrets.DATABASE_PORT }}
+            DB_ENGINE: ${{ secrets.DATABASE_ENGINE }}
+            DB_USER: ${{ secrets.DATABASE_USER }}
+            DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+            DB_HOST: ${{ secrets.DATABASE_HOST }}
+            DB_NAME: ${{ secrets.DATABASE_NAME }}
+            DB_PORT: ${{ secrets.DATABASE_PORT }}
   #       run: pytest
 
   #      - name: Деплой
