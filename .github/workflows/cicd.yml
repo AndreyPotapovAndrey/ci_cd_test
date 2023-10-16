@@ -66,7 +66,7 @@
           with:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USER }}
-            password: ${{ secrets.SSH_PASSWORD }}
+            password: ${{ secrets.SSH_PASS }}
             script: expect /home/andrey/django_cicd/deploy.exp
 
 #              cd /home/andrey/django_cicd
